@@ -51,6 +51,7 @@ class CorrectActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NatureAppTheme {
+                window.decorView.announceForAccessibility("You are correct! Click next question")
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),

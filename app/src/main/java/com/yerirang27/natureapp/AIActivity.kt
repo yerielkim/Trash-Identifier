@@ -52,6 +52,7 @@ class AIActivity : ComponentActivity() {
         QuizBank.createQuizBank()
         setContent {
             NatureAppTheme {
+                window.decorView.announceForAccessibility("What do you want to throw away? Take a picture by pressing on the camera icon. Click return to go back")
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),

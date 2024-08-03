@@ -54,6 +54,7 @@ class SettingsActivity : ComponentActivity() {
         val savedFontSize = sharedPreferences.getString("font_size", "default")
         setContent {
             NatureAppTheme {
+                window.decorView.announceForAccessibility("Select the font size. The current font is " + savedFontSize  + "Choose from default and large. Click return to go back")
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),

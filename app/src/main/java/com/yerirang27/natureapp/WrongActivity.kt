@@ -52,7 +52,9 @@ class WrongActivity : ComponentActivity() {
         setContent {
             NatureAppTheme {
                 val rightAnswer = intent.getStringExtra("RIGHT_ANSWER") ?: "[right answer]"
-                // A surface container using the 'background' color from the theme
+                window.decorView.announceForAccessibility("Not quite. You should throw it in the $rightAnswer bin! Click on the images to learn more! Click next question to proceed")
+
+                        // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,

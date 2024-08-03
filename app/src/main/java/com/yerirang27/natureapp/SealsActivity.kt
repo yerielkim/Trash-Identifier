@@ -47,6 +47,7 @@ class SealsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NatureAppTheme {
+                window.decorView.announceForAccessibility("Our animal friends will get hurt by our mistakes. They get trapped in plastic or become sick! Click return to go back.")
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),

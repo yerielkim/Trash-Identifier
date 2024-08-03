@@ -36,6 +36,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalAccessibilityManager
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -54,6 +56,8 @@ class GameActivity : ComponentActivity() {
         setContent {
             NatureAppTheme {
                 // A surface container using the 'background' color from the theme
+                window.decorView.announceForAccessibility("Where does this go?" + QuizBank.currentQuestion.contentDescription + "...Three options from left to right: recycling, trash, and compost.")
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
