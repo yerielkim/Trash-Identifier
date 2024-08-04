@@ -19,6 +19,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,15 +30,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.yerirang27.natureapp.ui.theme.NatureAppTheme
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class AIDetailActivity : ComponentActivity() {
+    val chatGPTService = ChatGPTService()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val state = mutableStateOf<Item?>(null)
         val image: Bitmap = intent.extras!!.get("data") as Bitmap
-
+        lifecycleScope.launch(Dispatchers.IO) {
+            state.value = chatGPTService.query(image)
+        }
         setContent {
             NatureAppTheme {
                 // A surface container using the 'background' color from the theme
@@ -56,6 +64,16 @@ class AIDetailActivity : ComponentActivity() {
                             text = "Captured image:",
                             fontSize = FontSize.content.value,
                         )
+                        if (state.value  != null) {
+                            Text(
+                                text = "Recognized item: " + state.value!!.item,
+                                fontSize = FontSize.content.value,
+                            )
+                            Text(
+                                text = "It should go to: " + state.value!!.recycleMethod,
+                                fontSize = FontSize.content.value,
+                            )
+                        }
                         Image(
                             bitmap = image.asImageBitmap(),
                             contentDescription = "Captured image",
